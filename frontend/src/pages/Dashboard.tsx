@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { iPayments, iPaymentDataObj } from '../utils/interfaces'
 import { PaymentListContext } from '../context/PaymentsContext'
 import { useQuery } from '@tanstack/react-query'
@@ -65,20 +65,27 @@ const Dashboard = () => {
         return result
     }
 
+    const filterPayments = useCallback(() => {
+        // search keyword
+        const keyword = searchString.toLowerCase()
+
+        // filter payments - flatten paymentData object, join it and return if keyword exists in that object
+        const result = paymentList.filter(paymentData => {
+            const found = flattenObject(paymentData)
+            return Object.values(found).join(' ').toLowerCase().includes(keyword)
+        })
+        setFilteredPaymentList(result)
+    }, [searchString, paymentList, flattenObject])
+
+    // to be able to seach on click of 'Enter' button on keyboard
+    const handleSearchOnEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            filterPayments()
+        }
+    }
+
     // if searchString is present then filter based on it otherwise setFilteredPaymentList to empty array so that payment history updates can be seen
     useEffect(() => {
-
-        const filterPayments = () => {
-            const keyword = searchString.toLowerCase()
-
-            // filter payments - flatten paymentData object, join it and return if keyword exists in that object
-            const result = paymentList.filter(paymentData => {
-                const found = flattenObject(paymentData)
-                return Object.values(found).join(' ').toLowerCase().includes(keyword)
-            })
-            setFilteredPaymentList(result)
-        }
-
         if (searchString.length > 0) {
             filterPayments()
         } else {
@@ -99,7 +106,8 @@ const Dashboard = () => {
                         <input className="peer h-full w-full outline-none text-sm text-gray-700 pr-2 border-gray-600"
                             type="text" id="search" placeholder="Search here..."
                             value={searchString}
-                            onChange={(e) => setSearchString(e.target.value)} />
+                            onChange={(e) => setSearchString(e.target.value)}
+                            onKeyDown={(e) => handleSearchOnEnter(e)} />
                         <div className="">
                             {
                                 searchString
