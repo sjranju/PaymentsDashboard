@@ -2,12 +2,11 @@ import { Fragment, useContext, useEffect, useRef, useState } from "react"
 import { Transition, Dialog } from '@headlessui/react'
 import { OpenPaymentDialogContext } from "../context/OpenDialogContext"
 import { CURRENCIES, iPaymentDataObj, iUsers } from "../utils/interfaces"
-import axios, { AxiosError } from "axios"
+import axios from "axios"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { PaymentListContext } from "../context/PaymentsContext"
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 import { GoCheckCircle } from "react-icons/go"
-import { GoXCircle } from "react-icons/go"
 import DataListBox from "./DataListBox"
 import InputBox from "./InputBox"
 import { NewPaymentContext } from "../context/NewPaymentAdded"
@@ -22,7 +21,7 @@ const CreatePayment = () => {
     const cancelButtonRef = useRef(null)
     const paymentDataRef = useRef<iPaymentDataObj>({} as iPaymentDataObj)
     const { paymentList, setPaymentList } = useContext(PaymentListContext)
-    const { newPayment, setNewPayment } = useContext(NewPaymentContext)
+    const { setNewPayment } = useContext(NewPaymentContext)
 
     // get /users
     const fetchUsers = async () => {
@@ -31,7 +30,7 @@ const CreatePayment = () => {
     }
 
     // Get Users' data
-    const { data, isLoading, isError, error: usersError, isSuccess } = useQuery<iUsers>({
+    const { data, isError, error: usersError } = useQuery<iUsers>({
         queryKey: ['getUsers'],
         queryFn: fetchUsers
     })
@@ -108,7 +107,7 @@ const CreatePayment = () => {
             }, 1000);
         }
 
-    }, [isPaymentMutationSuccess])
+    }, [isPaymentMutationSuccess, setOpenDialog])
 
     return (
         <Transition.Root show={openDialog} as={Fragment}>

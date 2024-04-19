@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import { iPaymentDataObj } from "../utils/interfaces"
 import { NewPaymentContext } from "../context/NewPaymentAdded"
 

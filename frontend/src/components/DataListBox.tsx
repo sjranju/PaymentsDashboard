@@ -1,5 +1,5 @@
-import React, { ChangeEvent } from 'react'
-import { CURRENCIES, iUsers } from '../utils/interfaces'
+import { ChangeEvent } from 'react'
+import { iUsers } from '../utils/interfaces'
 
 interface iDataListProps {
     data: iUsers,

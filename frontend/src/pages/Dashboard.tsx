@@ -40,7 +40,7 @@ const Dashboard = () => {
 
     // react-query to get payment data 
     // reactively gets as the server produces new payments on the `GET /payments` endpoint
-    const { isError, error: paymentResponseError, isLoadingError } = useQuery({
+    const { isError, error: paymentResponseError } = useQuery({
         queryKey: ['paymentData'],
         queryFn: fetchPayment,
         refetchInterval: 1000
@@ -91,7 +91,7 @@ const Dashboard = () => {
         } else {
             setFilteredPaymentList([])
         }
-    }, [searchString])
+    }, [searchString, filterPayments])
 
     return (
         <div className="py-8 w-full px-32 bg-neutral-100">
