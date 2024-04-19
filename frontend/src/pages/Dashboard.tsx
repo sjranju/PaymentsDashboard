@@ -75,7 +75,7 @@ const Dashboard = () => {
             return Object.values(found).join(' ').toLowerCase().includes(keyword)
         })
         setFilteredPaymentList(result)
-    }, [searchString, paymentList, flattenObject])
+    }, [searchString, paymentList])
 
     // to be able to seach on click of 'Enter' button on keyboard
     const handleSearchOnEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -91,7 +91,7 @@ const Dashboard = () => {
         } else {
             setFilteredPaymentList([])
         }
-    }, [searchString])
+    }, [searchString, filterPayments])
 
     return (
         <div className="py-8 w-full px-32 bg-neutral-100">
