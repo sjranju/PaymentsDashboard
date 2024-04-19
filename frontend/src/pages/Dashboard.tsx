@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { iPayments, iPaymentDataObj } from '../utils/interfaces'
 import { PaymentListContext } from '../context/PaymentsContext'
 import { useQuery } from '@tanstack/react-query'
@@ -65,7 +65,7 @@ const Dashboard = () => {
         return result
     }
 
-    const filterPayments = () => {
+    const filterPayments = useCallback(() => {
         // search keyword
         const keyword = searchString.toLowerCase()
 
@@ -75,7 +75,7 @@ const Dashboard = () => {
             return Object.values(found).join(' ').toLowerCase().includes(keyword)
         })
         setFilteredPaymentList(result)
-    }
+    }, [searchString])
 
     // to be able to seach on click of 'Enter' button on keyboard
     const handleSearchOnEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
