@@ -1,10 +1,7 @@
 import _ from 'lodash';
-import BodyParser from 'body-parser';
-import Cors from 'cors';
-import Express from 'express';
+import { Router } from 'express';
 import Seedrandom from 'seedrandom';
 
-import Config from './config/index.js';
 import Users from './users/index.js';
 import Util from './util/index.js';
 
@@ -13,20 +10,14 @@ const DRINKS = ['coffee', 'orange juice', 'soda', 'tea', 'water'];
 const FOODS = ['hamburgers', 'hot dogs', 'pasta', 'pizza', 'salad'];
 
 // Build a basic express app
-const app = Express();
-const { port } = Config.server;
+const router = Router();
 
 // Keep a list of payment ids that have been used
 const paymentIds = {};
 
-// Parse JSON bodies of requests
-app.use(BodyParser.json());
-
-// Add CORS headers to allow everything
-app.use(Cors());
 
 // Endpoint to get randomly generated payments
-app.get('/payments', (req, res) => {
+router.get('/payments', (req, res) => {
   // Seed a PRNG to use to generate all of the random data. Seed it from the seconds
   // since the epoch, so that if multiple requests are made within the same clock second,
   // they'll get the same data.  After this PRNG is generated, it's very important that all random
@@ -56,7 +47,7 @@ app.get('/payments', (req, res) => {
 });
 
 // Endpoint to create a new payment
-app.post('/payments', (req, res) => {
+router.post('/payments', (req, res) => {
   // No need to store this payment, just check if it's correctly formatted, and then randomly choose
   // whether to return success or failure.  Its not necessary to keep the same behavior within the same second; it's
   // all random.
@@ -111,12 +102,10 @@ app.post('/payments', (req, res) => {
 });
 
 // Endpoint to return a list of all users
-app.get('/users', (req, res) => {
+router.get('/users', (req, res) => {
   res.json({
     data: Users.getAllUsers(),
   });
 });
 
-
-// Start it listening.
-app.listen(port, () => console.log(`Payments data app listening on port ${port}!`));
+export default router

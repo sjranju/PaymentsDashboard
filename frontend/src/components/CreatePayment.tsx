@@ -25,7 +25,7 @@ const CreatePayment = () => {
 
     // get /users
     const fetchUsers = async () => {
-        const response = await axios.get('http://localhost:8080/users')
+        const response = await axios.get('http://localhost:8080/api/users')
         return response.data
     }
 
@@ -40,7 +40,7 @@ const CreatePayment = () => {
         try {
             const response = await axios({
                 method: 'post',
-                url: 'http://localhost:8080/payments',
+                url: 'http://localhost:8080/api/payments',
                 data: paymentData,
                 headers: {
                     "Content-Type": "application/json"
