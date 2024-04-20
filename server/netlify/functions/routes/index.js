@@ -2,8 +2,8 @@ import _ from 'lodash';
 import { Router } from 'express';
 import Seedrandom from 'seedrandom';
 
-import Users from './users/index.js';
-import Util from './util/index.js';
+import Users from '../users/index.js';
+import Util from '../util/index.js';
 
 const CURRENCIES = ['BTC', 'GBP', 'EUR', 'JPY', 'USD'];
 const DRINKS = ['coffee', 'orange juice', 'soda', 'tea', 'water'];
@@ -17,7 +17,7 @@ const paymentIds = {};
 
 
 // Endpoint to get randomly generated payments
-router.get('/payments', (req, res) => {
+router.get('/api/payments', (req, res) => {
   // Seed a PRNG to use to generate all of the random data. Seed it from the seconds
   // since the epoch, so that if multiple requests are made within the same clock second,
   // they'll get the same data.  After this PRNG is generated, it's very important that all random
@@ -47,7 +47,7 @@ router.get('/payments', (req, res) => {
 });
 
 // Endpoint to create a new payment
-router.post('/payments', (req, res) => {
+router.post('/api/payments', (req, res) => {
   // No need to store this payment, just check if it's correctly formatted, and then randomly choose
   // whether to return success or failure.  Its not necessary to keep the same behavior within the same second; it's
   // all random.
@@ -88,7 +88,6 @@ router.post('/payments', (req, res) => {
   }
 
   // No validation on the memo
-  console.log('in post payment')
   // Randomly decide if the payment succeeds or fails.
   if (Math.random() < 0.5) {
     console.log(`Payment with id '${payment.id}' failed!  Please try again later.`);
@@ -102,7 +101,7 @@ router.post('/payments', (req, res) => {
 });
 
 // Endpoint to return a list of all users
-router.get('/users', (req, res) => {
+router.get('/api/users', (req, res) => {
   res.json({
     data: Users.getAllUsers(),
   });
