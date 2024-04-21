@@ -1,7 +1,7 @@
 import express from 'express';
 import serverless from 'serverless-http';
-import { router as rootRouter } from './routes/index.js'
-import Config from './config/index.js';
+import router from '../../index.js'
+import Config from '../../config/index.js';
 import Cors from 'cors';
 
 export async function handler(event, context) {
@@ -10,7 +10,7 @@ export async function handler(event, context) {
     // Add CORS headers to allow everything
     app.use(Cors());
     app.use(express.json())
-    app.use('/api/', rootRouter);
+    app.use('/api/', router);
     return serverless(app)(event, context);
 };
 

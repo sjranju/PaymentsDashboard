@@ -2,8 +2,8 @@ import _ from 'lodash';
 import { Router } from 'express';
 import Seedrandom from 'seedrandom';
 
-import Users from '../users/index.js';
-import Util from '../util/index.js';
+import Users from './users/index.js';
+import Util from './util/index.js';
 
 const CURRENCIES = ['BTC', 'GBP', 'EUR', 'JPY', 'USD'];
 const DRINKS = ['coffee', 'orange juice', 'soda', 'tea', 'water'];
