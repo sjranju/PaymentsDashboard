@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useCallback, useContext, useEffect, useState } from 'react'
-import { iPayments, iPaymentDataObj, flattenObject } from '../utils/interfaces'
+import { iPayments, iPaymentDataObj, flattenObject, REACT_APP_BACKEND_URL } from '../utils/interfaces'
 import { PaymentListContext } from '../context/PaymentsContext'
 import { useQuery } from '@tanstack/react-query'
 import { IoSearch, IoClose } from "react-icons/io5";
@@ -17,7 +17,7 @@ const Dashboard = () => {
     // get /payments
     const fetchPayment = async () => {
         try {
-            const response = await axios.get('http://REACT_APP_BACKEND_URL/api/payments')
+            const response = await axios.get(`{${REACT_APP_BACKEND_URL}/api/payments}`)
             const paymentData: iPayments = response.data
             const existingPaymentIDs = paymentList.map(paymentData => paymentData.id)
 
