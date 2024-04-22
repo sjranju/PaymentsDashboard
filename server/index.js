@@ -17,7 +17,7 @@ const paymentIds = {};
 
 
 // Endpoint to get randomly generated payments
-router.get('/api/payments', (req, res) => {
+router.get('/payments', (req, res) => {
   // Seed a PRNG to use to generate all of the random data. Seed it from the seconds
   // since the epoch, so that if multiple requests are made within the same clock second,
   // they'll get the same data.  After this PRNG is generated, it's very important that all random
@@ -47,7 +47,7 @@ router.get('/api/payments', (req, res) => {
 });
 
 // Endpoint to create a new payment
-router.post('/api/payments', (req, res) => {
+router.post('/payments', (req, res) => {
   // No need to store this payment, just check if it's correctly formatted, and then randomly choose
   // whether to return success or failure.  Its not necessary to keep the same behavior within the same second; it's
   // all random.
@@ -101,7 +101,7 @@ router.post('/api/payments', (req, res) => {
 });
 
 // Endpoint to return a list of all users
-router.get('/api/users', (req, res) => {
+router.get('/users', (req, res) => {
   res.json({
     data: Users.getAllUsers(),
   });

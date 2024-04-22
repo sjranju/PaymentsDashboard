@@ -47,7 +47,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
    ```
    yarn start
    ```
-5. Ensure that the backend API is running and accessible at http://localhost:8080 for full functionality.
+5. Ensure that the backend API is running and accessible at http://REACT_APP_BACKEND_URL for full functionality.
 6. Access the web dashboard in your browser at [http://localhost:3000](http://localhost:3000).
 
 ## Available Scripts

@@ -46,3 +46,5 @@ export const flattenObject = (obj: any) => {
     }
     return result
 }
+
+export const REACT_APP_BACKEND_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'https://paymentsdashboardbackend.netlify.app/';

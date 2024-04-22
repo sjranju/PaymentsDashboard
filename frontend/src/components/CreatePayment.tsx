@@ -1,7 +1,7 @@
 import { Fragment, useContext, useEffect, useRef, useState } from "react"
 import { Transition, Dialog } from '@headlessui/react'
 import { OpenPaymentDialogContext } from "../context/OpenDialogContext"
-import { CURRENCIES, iPaymentDataObj, iUsers } from "../utils/interfaces"
+import { CURRENCIES, REACT_APP_BACKEND_URL, iPaymentDataObj, iUsers } from "../utils/interfaces"
 import axios from "axios"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { PaymentListContext } from "../context/PaymentsContext"
@@ -25,7 +25,7 @@ const CreatePayment = () => {
 
     // get /users
     const fetchUsers = async () => {
-        const response = await axios.get('http://localhost:8080/api/users')
+        const response = await axios.get(`{${REACT_APP_BACKEND_URL}/api/users}`)
         return response.data
     }
 
@@ -40,7 +40,7 @@ const CreatePayment = () => {
         try {
             const response = await axios({
                 method: 'post',
-                url: 'http://localhost:8080/api/payments',
+                url: 'http://REACT_APP_BACKEND_URL/api/payments',
                 data: paymentData,
                 headers: {
                     "Content-Type": "application/json"

@@ -1,0 +1,9 @@
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = "frontend/build"
+[[redirects]]
+  from = "/api/*"
+  to = "https://paymentsdashboardbackend.netlify.app/.netlify/functions/:splat"
+  status = 200
+  force = true
