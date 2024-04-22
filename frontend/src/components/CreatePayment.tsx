@@ -25,7 +25,7 @@ const CreatePayment = () => {
 
     // get /users
     const fetchUsers = async () => {
-        const response = await axios.get(`{${REACT_APP_BACKEND_URL}/api/users}`)
+        const response = await axios.get(`${REACT_APP_BACKEND_URL}/api/users`)
         return response.data
     }
 
@@ -40,7 +40,7 @@ const CreatePayment = () => {
         try {
             const response = await axios({
                 method: 'post',
-                url: 'http://REACT_APP_BACKEND_URL/api/payments',
+                url: `${REACT_APP_BACKEND_URL}/api/payments`,
                 data: paymentData,
                 headers: {
                     "Content-Type": "application/json"

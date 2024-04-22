@@ -17,7 +17,7 @@ const Dashboard = () => {
     // get /payments
     const fetchPayment = async () => {
         try {
-            const response = await axios.get(`{${REACT_APP_BACKEND_URL}/api/payments}`)
+            const response = await axios.get(`${REACT_APP_BACKEND_URL}/api/payments`)
             const paymentData: iPayments = response.data
             const existingPaymentIDs = paymentList.map(paymentData => paymentData.id)
 
