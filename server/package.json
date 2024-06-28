@@ -1,7 +1,7 @@
 {
   "name": "paymentsdata",
   "version": "1.0.0",
-  "description": "Payments data server for Circle Internet Financial",
+  "description": "Payments data server",
   "main": "index.js",
   "author": "Marcus Boorstin",
   "license": "UNLICENSED",
